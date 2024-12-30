@@ -1,71 +1,36 @@
 # Earnings Transcript Summary API
 
-This FastAPI-based service summarizes corporate earnings transcripts into structured JSON categories.  It's hosted on an AWS EC2 instance and leverages Google's Gemini AI model for advanced summarization.
-
-## API URL
-
-`http://50.17.51.41/earnings_transcript_summary/`
+This FastAPI-based service summarizes corporate earnings transcripts into structured JSON categories. It's hosted on an AWS EC2 instance and leverages Google's Gemini AI model for advanced summarization.
 
 ## Features
 
-* Summarizes transcripts into categories like financial performance, market dynamics, expansion plans, environmental risks, and regulatory changes.
+* Summarizes transcripts into categories like:
+    * Financial performance
+    * Market dynamics
+    * Expansion plans
+    * Environmental risks
+    * Regulatory changes
 * Supports both text and PDF input.
 * Outputs structured JSON summaries.
-* Integrates Google Gemini AI for enhanced summarization.
+* Uses Google Gemini AI for enhanced summarization.
 
-## Technical Stack
+## API Usage
 
-* **Framework:** FastAPI
-* **Hosting:** AWS EC2
-* **Key Libraries:**
-    * `fastapi`
-    * `PyPDF2` (PDF text extraction)
-    * `google-cloud-aiplatform` (Google AI integration)
-    * `vertexai`
-    * `python-dotenv` (environment variable management)
+**Base URL:** `http://50.17.51.41/earnings_transcript_summary/`
 
-
-## Environment Setup
-
-**Requirements:**
-
-* Python 3.x
-* Libraries listed in `requirements.txt`
-
-**Installation Steps:**
-
-1. Clone the repository: `https://github.com/Kshitij10000/fast_api_summarizer.git`
-2. Create and activate a virtual environment: `python3 -m venv env` and `source env/bin/activate` (or `env\Scripts\activate` on Windows)
-3. Install dependencies: `pip install -r requirements.txt`
-4. Configure `.env`:
-    * Add your Google API key: `GOOGLE_API_KEY='your_google_api_key'`
-5. Start the server: `uvicorn main:app --host 0.0.0.0 --port 8000`
-
-
-## API Endpoints
-
-**1. Root Endpoint:**
-
-* **Method:** `GET`
-* **URL:** `/`
-* **Returns:** List of available endpoints and descriptions.
-
-**2. Text-based Summary:**
+**1. Text-based Summary:**
 
 * **Method:** `POST`
-* **URL:** `/earnings_transcript_summary/`
-* **Input (JSON):**
+* **Endpoint:** `/earnings_transcript_summary/`
+* **Request Body (JSON):**
 ```json
 {
   "company_name": "Patym",
   "transcript_text": "...Earnings call transcript text here..."
 }
-content_copy
-download
 Use code with caution.
 Markdown
-
-Response (JSON):
+Response Body (JSON):
 
 {
   "company_name": "Patym",
@@ -75,75 +40,79 @@ Response (JSON):
   "environmental_risks": "...",
   "regulatory_or_policy_changes": "..."
 }
-content_copy
-download
 Use code with caution.
 Json
-
-3. PDF-based Summary:
+2. PDF-based Summary:
 
 Method: POST
 
-URL: /earnings_transcript_summary_from_pdf/
+Endpoint: /earnings_transcript_summary_from_pdf/
 
-Input:
+Request Body (Multipart Form Data):
 
 company_name (String): Name of the company.
 
-pdf_file (File): Uploaded PDF file.
+pdf_file (File): The PDF file to upload.
 
-Response (JSON): Same as Text-based Summary response.
+Response Body (JSON): Same as Text-based Summary response.
 
-Usage Guide (Postman)
+Technical Details
+Framework: FastAPI
 
-Create a POST request.
+Hosting: AWS EC2
 
-Set the URL to the appropriate endpoint.
+Key Libraries: fastapi, PyPDF2, google-cloud-aiplatform, vertexai, python-dotenv
 
-Select "Raw" and "JSON" in the body tab.
+Source Code: https://github.com/Kshitij10000/fast_api_summarizer.git
 
-Paste the JSON input.
+Installation & Setup
+Clone the repository:
 
-Click "Send".
-
-JSON Input Validation
-
-Ensure proper JSON formatting.
-
-Validate inputs for special characters and malformed data.
-
-Development Details
-
-main.py: FastAPI application and endpoints.
-
-summarization_service.py: Summarization logic using Google AI.
-
-clean_pdf.py: PDF text extraction and cleaning.
-
-.env: Environment variables.
-
-requirements.txt: Project dependencies.
-
-Summarization Workflow
-
-Input validation (Pydantic).
-
-PDF text extraction and cleaning (PyPDF2).
-
-Token count validation (Google AI).
-
-Summarization (Google Gemini).
-
-JSON response.
-
-Known Issues
-
-JSON Input Errors: Ensure valid JSON.
-
-Token Limits: Transcripts over 20,000 tokens are not processed.
-
-PDF Issues: Non-text PDFs may fail text extraction.
-
-content_copy
-download
+git clone https://github.com/Kshitij10000/fast_api_summarizer.git
 Use code with caution.
+Bash
+Create a virtual environment:
+
+python3 -m venv env
+source env/bin/activate  # On Windows: env\Scripts\activate
+Use code with caution.
+Bash
+Install dependencies:
+
+pip install -r requirements.txt
+Use code with caution.
+Bash
+Set up environment variables: Create a .env file and add your Google API key:
+
+GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
+Use code with caution.
+Run the server:
+
+uvicorn main:app --host 0.0.0.0 --port 8000
+Use code with caution.
+Bash
+Known Issues
+JSON Input Errors: Ensure valid JSON input.
+
+Token Limits: Transcripts exceeding 20,000 tokens are not processed.
+
+PDF Issues: Non-text PDFs (e.g., scanned documents) may have text extraction issues.
+
+Contributing
+Contributions are welcome! Please see the CONTRIBUTING.md file (if you have one, otherwise explain how to contribute).
+
+License
+Specify your license here, e.g., MIT (Add a LICENSE file to your repo).
+
+Key changes and improvements:
+
+* **Clearer Structure:**  Improved headings and organization for easier readability.
+* **Concise Language:**  More direct and to-the-point explanations.
+* **Emphasis on API Usage:** Highlighted how to use the API with clear request and response examples.
+* **Multipart Form Data:** Clarified that PDF upload uses multipart form data, not JSON.
+* **GitHub Integration:**  Added a direct link to the repository.
+* **Installation and Setup Instructions:** Made them more explicit and beginner-friendly.
+* **Contributing and License Sections:** Added placeholders for these important sections to encourage community involvement and clarify licensing.
+
+
+This improved README is more suitable for a GitHub repository and provides better guidance to users and potential contributors. Remember to replace placeholders like `"YOUR_GOOGLE_API_KEY"` and add actual `CONTRIBUTING.md` and `LICENSE` files to your project.
