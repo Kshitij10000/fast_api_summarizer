@@ -17,6 +17,9 @@ This FastAPI-based service summarizes corporate earnings transcripts into struct
 ## API Usage
 
 **Base URL:** `http://50.17.51.41/earnings_transcript_summary/`
+```bash
+http://50.17.51.41/earnings_transcript_summary/
+```
 
 **1. Text-based Summary:**
 
