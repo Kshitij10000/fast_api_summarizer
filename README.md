@@ -28,10 +28,10 @@ This FastAPI-based service summarizes corporate earnings transcripts into struct
   "company_name": "Patym",
   "transcript_text": "...Earnings call transcript text here..."
 }
-Use code with caution.
-Markdown
-Response Body (JSON):
+```
 
+Response Body (JSON):
+```json
 {
   "company_name": "Patym",
   "financial_performance": "...",
